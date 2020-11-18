@@ -98,11 +98,11 @@ void CMOTSlideShowEncoder::AddNextPicture ()
     {
       /* Get current file name */
       QString tmp=vecPicFileNames[iPictureCnt].name+"."+vecPicFileNames[iPictureCnt].format;
-      strCurObjName = tmp.toLatin1().data();
+      strCurObjName = tmp.toUtf8().data();
       CMOTObject MOTPicture;
           /* Set file name and format string */
       MOTPicture.strName = strCurObjName;
-      MOTPicture.strFormat = vecPicFileNames[iPictureCnt].format.toLatin1().data();
+      MOTPicture.strFormat = vecPicFileNames[iPictureCnt].format.toUtf8().data();
       MOTPicture.vecbRawData.Init (0);
       for(i=0;i<vecPicFileNames[iPictureCnt].arrayPtr->count();i++)
          {
@@ -127,6 +127,6 @@ void CMOTSlideShowEncoder::AddArray (QByteArray *ba,const QString name,const QSt
     int iOldNumObj = vecPicFileNames.Size ();
     vecPicFileNames.Enlarge (1);
     vecPicFileNames[iOldNumObj].arrayPtr = ba;
-    vecPicFileNames[iOldNumObj].name=name.toLatin1();
+    vecPicFileNames[iOldNumObj].name=name.toUtf8();
     vecPicFileNames[iOldNumObj].format=format;
 }

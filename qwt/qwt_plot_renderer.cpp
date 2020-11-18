@@ -264,7 +264,7 @@ void QwtPlotRenderer::renderDocument( QwtPlot *plot,
     else
     {
         if ( QImageWriter::supportedImageFormats().indexOf(
-            format.toLatin1() ) >= 0 )
+            format.toUtf8() ) >= 0 )
         {
             const QRect imageRect = documentRect.toRect();
             const int dotsPerMeter = qRound( resolution * mmToInch * 1000.0 );
@@ -278,7 +278,7 @@ void QwtPlotRenderer::renderDocument( QwtPlot *plot,
             render( plot, &painter, imageRect );
             painter.end();
 
-            image.save( fileName, format.toLatin1() );
+            image.save( fileName, format.toUtf8() );
         }
     }
 }

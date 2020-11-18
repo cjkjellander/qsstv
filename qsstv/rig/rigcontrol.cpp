@@ -82,14 +82,14 @@ bool rigControl::init()
     {
       if(!catParams.civAddress.isEmpty())
         {
-          rig_set_conf(my_rig, rig_token_lookup(my_rig, "civaddr"), catParams.civAddress.toLatin1());
+          rig_set_conf(my_rig, rig_token_lookup(my_rig, "civaddr"), catParams.civAddress.toUtf8());
         }
     }
   if(!catParams.serialPort.isEmpty())
      {
-      strncpy(my_rig->state.rigport.pathname,(const char *)catParams.serialPort.toLatin1().data(),FILPATHLEN);
+      strncpy(my_rig->state.rigport.pathname,(const char *)catParams.serialPort.toUtf8().data(),FILPATHLEN);
     }
-//  strncpy(my_rig->state.pttport.pathname,(const char *)catParams.serialPort.toLatin1().data(),FILPATHLEN);
+//  strncpy(my_rig->state.pttport.pathname,(const char *)catParams.serialPort.toUtf8().data(),FILPATHLEN);
   my_rig->state.rigport.parm.serial.rate = catParams.baudrate;
   my_rig->state.rigport.parm.serial.data_bits=catParams.databits;
   my_rig->state.rigport.parm.serial.stop_bits=catParams.stopbits;
@@ -244,7 +244,7 @@ bool rigControl::setMode(QString mode,QString passBand)
       return true;
     }
 
-  rmode_t rmode=rig_parse_mode(mode.toLatin1().data());
+  rmode_t rmode=rig_parse_mode(mode.toUtf8().data());
   if(passBand=="Narrow")
     {
       pb=rig_passband_narrow(my_rig,rmode);
@@ -379,7 +379,7 @@ void rigControl::activatePTT(bool b)
       if (catParams.pttSerialPort.isEmpty()) return;
       if(serialP==0)
         {
-          serialP=::open(catParams.pttSerialPort.toLatin1().data(),O_RDWR);
+          serialP=::open(catParams.pttSerialPort.toUtf8().data(),O_RDWR);
           if (serialP<=0)
             {
               QMessageBox::warning(txWidgetPtr,"Serial Port Error",
@@ -471,7 +471,7 @@ int  rigControl::rawCommand(QByteArray ba)
         }
 
       command+="\n";
-      cmdBa=command.toLatin1();
+      cmdBa=command.toUtf8();
       result=write_block(&rs->rigport,cmdBa.constData(), cmdBa.count());
 
     }

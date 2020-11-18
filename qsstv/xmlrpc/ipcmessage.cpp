@@ -35,7 +35,7 @@ bool ipcMessage::sendMessage(QString t)
   int len;
   // message to send
   msgBuf.mtype = MTYPE; // set the type of message
-  strncpy(msgBuf.mtext,t.toLatin1().data(),MSGTXMAXLEN);
+  strncpy(msgBuf.mtext,t.toUtf8().data(),MSGTXMAXLEN);
   len=strlen(msgBuf.mtext);
 
   // send the message to queue

@@ -44,7 +44,7 @@ MaiaXmlRpcClient::MaiaXmlRpcClient(QUrl url, QObject* parent) : QObject(parent),
 MaiaXmlRpcClient::MaiaXmlRpcClient(QUrl url, QString userAgent, QObject *parent) : QObject(parent) {
 	// userAgent should adhere to RFC 1945 http://tools.ietf.org/html/rfc1945
 	init();
-	request.setRawHeader("User-Agent", userAgent.toLatin1());
+	request.setRawHeader("User-Agent", userAgent.toUtf8());
 	setUrl(url);
 }
 
@@ -68,7 +68,7 @@ void MaiaXmlRpcClient::setUrl(QUrl url)
 }
 
 void MaiaXmlRpcClient::setUserAgent(QString userAgent) {
-	request.setRawHeader("User-Agent", userAgent.toLatin1());
+	request.setRawHeader("User-Agent", userAgent.toUtf8());
 }
 
 QNetworkReply* MaiaXmlRpcClient::call(QString method, QList<QVariant> args,

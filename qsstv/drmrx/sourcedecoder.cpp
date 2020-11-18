@@ -392,7 +392,7 @@ void sourceDecoder::loadParams(transportBlock *tbPtr,unsigned char paramID,int l
     case 6:
       break;
     case 12:
-      tbPtr->fileName=QString::fromLatin1(currentDataPacket.ba.data()+1).left(len-1);
+      tbPtr->fileName=QString::fromUtf8(currentDataPacket.ba.data()+1).left(len-1);
       stce= new rxDRMStatusEvent(QString("%1").arg(tbPtr->fileName));
       QApplication::postEvent( dispatcherPtr, stce );  // Qt will delete it when done
       break;
@@ -542,7 +542,7 @@ void sourceDecoder::saveImage(transportBlock *tbPtr)
                 {
                   ff->setupFtp("GetHybridImage",hc.host(),hc.port(),hc.user(),hc.passwd(),hc.dir()+"/"+hybridFtpHybridFilesDirectory);
 
-                  ff->downloadFile(tbPtr->fileName.toLatin1(),downloadF,false,false);
+                  ff->downloadFile(tbPtr->fileName.toUtf8(),downloadF,false,false);
                 }
               tbPtr->retrieveTries++;
 
@@ -743,12 +743,12 @@ bool sourceDecoder::storeBSR(transportBlock *tb, bool compat)
     }
   tb->baBSR.clear();
   if(erasureList.count()<3) return false; //erasurelist has already totalSegments and defaultSegmentSize
-  tb->baBSR.append(QString::number(tb->transportID).toLatin1().data());
+  tb->baBSR.append(QString::number(tb->transportID).toUtf8().data());
   tb->baBSR.append("\n");
   tb->baBSR.append("H_OK\n");
-  tb->baBSR.append(QString::number(erasureList.at(1)).toLatin1().data());
+  tb->baBSR.append(QString::number(erasureList.at(1)).toUtf8().data());
   tb->baBSR.append("\n");
-  tb->baBSR.append(QString::number(erasureList.at(2)).toLatin1().data());
+  tb->baBSR.append(QString::number(erasureList.at(2)).toUtf8().data());
   tb->baBSR.append("\n");
 
   prevErasure=erasureList.at(2);
@@ -763,21 +763,21 @@ bool sourceDecoder::storeBSR(transportBlock *tb, bool compat)
         {
           if(needsFiller)
             {
-              tb->baBSR.append(QString::number(-1).toLatin1().data());
+              tb->baBSR.append(QString::number(-1).toUtf8().data());
               tb->baBSR.append("\n");
               needsFiller=false;
             }
-          tb->baBSR.append(QString::number(erasureList.at(i)).toLatin1().data());
+          tb->baBSR.append(QString::number(erasureList.at(i)).toUtf8().data());
           tb->baBSR.append("\n");
         }
       prevErasure=erasureList.at(i);
     }
   if(needsFiller)
     {
-      tb->baBSR.append(QString::number(-1).toLatin1().data());
+      tb->baBSR.append(QString::number(-1).toUtf8().data());
       tb->baBSR.append("\n");
       needsFiller=false;
-      tb->baBSR.append(QString::number(erasureList.at(erasureList.count()-1)).toLatin1().data());
+      tb->baBSR.append(QString::number(erasureList.at(erasureList.count()-1)).toUtf8().data());
       tb->baBSR.append("\n");
     }
   tb->baBSR.append("-99\n");

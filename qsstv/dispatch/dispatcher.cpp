@@ -279,7 +279,7 @@ void dispatcher::customEvent( QEvent * e )
       break;
 //    case notifyAction: // sends notification after reception of hybrid image
 //      // todo     notifyRXIntfPtr->mremove(((notifyActionEvent*)e)->getToRemove());
-//      //      notifyRXIntfPtr->uploadData(((notifyActionEvent*)e)->getMsg().toLatin1(), ((notifyActionEvent*)e)->getFilename());
+//      //      notifyRXIntfPtr->uploadData(((notifyActionEvent*)e)->getMsg().toUtf8(), ((notifyActionEvent*)e)->getFilename());
 //      break;
 
     case notifyCheck:
@@ -513,7 +513,7 @@ void dispatcher::saveImage(QString fileName, QString infotext)
       p.setBrush(Qt::white);
       p.setFont(font);
       p.drawText(2,height-fontm.descent()-1, text);
-      im.save( fn, ftpDefaultImageFormat.toUpper().toLatin1().data());
+      im.save( fn, ftpDefaultImageFormat.toUpper().toUtf8().data());
       p.end();
       uploadToRXServer(remoteDir, fn);
     }

@@ -333,7 +333,7 @@ bool trash(QString filename,bool forceDelete)
     if(forceDelete) orgFile.remove();
     return false;
   }
-  infoFile.write(infoTxt.toLatin1().data());
+  infoFile.write(infoTxt.toUtf8().data());
   infoFile.close();
   QFile trashFile(info.absoluteFilePath());
   QString target;

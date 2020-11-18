@@ -168,7 +168,7 @@ QImage jp2IO::decode(QString fileName)
   int wr, hr;         // taken from OpenJPEG
   init();
 
-  l_stream = opj_stream_create_default_file_stream(fileName.toLatin1(),1);
+  l_stream = opj_stream_create_default_file_stream(fileName.toUtf8(),1);
   if (!l_stream)
     {
       addToLogDebug( QString("ERROR -> failed to create the stream from the file %1").arg(parameters.infile),LOGALL);
@@ -409,7 +409,7 @@ QByteArray jp2IO::encode(QImage qimage, QImage &newImage,int &fileSize, int comp
 {
   QByteArray byteArray;
   QString fn=QString("%1/%2").arg(QDir::tempPath()).arg("qsstv.tmp");
-  //  char *of=fn.toLatin1().data();
+  //  char *of=fn.toUtf8().data();
   bool success;
   init();
   fileSize=0;
@@ -417,7 +417,7 @@ QByteArray jp2IO::encode(QImage qimage, QImage &newImage,int &fileSize, int comp
   cparameters.cp_disto_alloc = 1;
   createImage(qimage);
   cparameters.cod_format=JP2_CFMT;
-  if(opj_strcpy_s(cparameters.outfile, sizeof(cparameters.outfile), fn.toLatin1().data()) != 0)
+  if(opj_strcpy_s(cparameters.outfile, sizeof(cparameters.outfile), fn.toUtf8().data()) != 0)
     {
       return byteArray;
     }

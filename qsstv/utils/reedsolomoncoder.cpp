@@ -276,9 +276,9 @@ bool reedSolomonCoder::encode(QByteArray &ba,QString extension,eRSType rsType)
   ec_buf.append(dataByte);
   dataByte = (unsigned char) (chunks/256) ;
   ec_buf.append(dataByte);
-  ec_buf.append(suffix.toLatin1().at(0));
-  ec_buf.append(suffix.toLatin1().at(1));
-  ec_buf.append(suffix.toLatin1().at(2));
+  ec_buf.append(suffix.toUtf8().at(0));
+  ec_buf.append(suffix.toUtf8().at(1));
+  ec_buf.append(suffix.toUtf8().at(2));
   dataByte=0;
   ec_buf.append(dataByte);
   ec_buf.append(tr_buf.left(rs_dsize-7));

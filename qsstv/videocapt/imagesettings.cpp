@@ -77,7 +77,7 @@
 
 imageSettings::imageSettings(QString cameraDevice, QWidget *parent) :   QDialog(parent)
 {
-  camDev=cameraDevice.toLatin1();
+  camDev=cameraDevice.toUtf8();
   ui= new Ui::imageSettingsUi;
   ui->setupUi(this);
   gridLayout=NULL;

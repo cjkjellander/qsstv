@@ -32,7 +32,7 @@ bool soundAlsa::init(int samplerate)
   tempDevice=outputAudioDevice.left(outputAudioDevice.indexOf(" "));
   for(iteration=0;iteration<20;iteration++)
     {
-      err = snd_pcm_open(&playbackHandle,tempDevice.toLatin1().data(), SND_PCM_STREAM_PLAYBACK,0); //open in blocking mode
+      err = snd_pcm_open(&playbackHandle,tempDevice.toUtf8().data(), SND_PCM_STREAM_PLAYBACK,0); //open in blocking mode
       if (err==-EBUSY)
         {
           msleep(500);
@@ -46,7 +46,7 @@ bool soundAlsa::init(int samplerate)
     }
   if(!alsaErrorHandler(err,"Unable to open "+outputAudioDevice)) return false;
   tempDevice=inputAudioDevice.left(inputAudioDevice.indexOf(" "));
-  err = snd_pcm_open(&captureHandle,tempDevice.toLatin1().data(), SND_PCM_STREAM_CAPTURE, 0);
+  err = snd_pcm_open(&captureHandle,tempDevice.toUtf8().data(), SND_PCM_STREAM_CAPTURE, 0);
   if(!alsaErrorHandler(err,"Unable to open "+inputAudioDevice)) return false;
   snd_pcm_hw_params_malloc ( &hwparams );
   snd_pcm_sw_params_malloc ( &swparams );

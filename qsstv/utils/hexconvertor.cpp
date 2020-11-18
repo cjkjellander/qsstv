@@ -21,7 +21,7 @@ bool hexFromString(QString s,QByteArray &ba,bool toHex)
     }
   else
     {
-      ba=s.toLatin1();
+      ba=s.toUtf8();
     }
   return true;
 }

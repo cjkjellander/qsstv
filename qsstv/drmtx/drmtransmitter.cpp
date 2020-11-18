@@ -109,7 +109,7 @@ void drmTransmitter::init(QByteArray *ba, QString name, QString format, drmTxPar
   Service.iServiceDescr=0;
   Service.iServiceID=0;
   Service.iLanguage=5;
-  Service.strLabel=params.callsign.toLatin1().data();
+  Service.strLabel=params.callsign.toUtf8().data();
   TransmParam->SetServiceParameters(0,Service);
   DRMTransmitter->Init();
   // calculate transmision time

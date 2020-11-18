@@ -86,7 +86,7 @@ bool videoCapture::open(QString videoDev)
   if (opened) return true;
   addToLog("opening Videocapture device",LOGCAM);
 
-  dev = v4l2_open(videoDevice.toLatin1().data(), O_RDWR);
+  dev = v4l2_open(videoDevice.toUtf8().data(), O_RDWR);
   if (dev < 0)
     {
       addToLog(QString("Error opening %1, %2").arg(videoDevice).arg(errno),LOGCAM);

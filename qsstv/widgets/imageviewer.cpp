@@ -804,7 +804,7 @@ void imageViewer::save(QString fileName,QString fmt,bool convertRGB, bool source
       if(source) im=sourceImage.convertToFormat(QImage::Format_RGB32);
       else im=displayedImage.convertToFormat(QImage::Format_RGB32);
     }
-  im.save(fileName,fmt.toUpper().toLatin1().data());
+  im.save(fileName,fmt.toUpper().toUtf8().data());
 }
 
 bool imageViewer::copyToBuffer(QByteArray *ba)

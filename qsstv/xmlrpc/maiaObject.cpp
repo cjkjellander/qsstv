@@ -211,7 +211,7 @@ QVariant MaiaObject::fromXml(const QDomElement &elem)
         if(typeElement.text().toLower() == "true" || typeElement.text() == "1") return QVariant(true);
         else  return QVariant(false);
     }
-    else if(typeName == "base64") return QVariant(QByteArray::fromBase64( typeElement.text().toLatin1()));
+    else if(typeName == "base64") return QVariant(QByteArray::fromBase64( typeElement.text().toUtf8()));
     else if(typeName == "datetime" || typeName == "datetime.iso8601") return QVariant(QDateTime::fromString(typeElement.text(), "yyyyMMddThh:mm:ss"));
     else if(typeName == "nil")  return QVariant(); // Non-standard extension: http://ontosys.com/xml-rpc/extensions.php
     else if ( typeName == "array" )

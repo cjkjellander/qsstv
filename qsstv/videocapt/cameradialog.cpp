@@ -203,7 +203,7 @@ void cameraDialog::getCameraInfo(QStringList devList)
       struct v4l2_capability cap;
       memset(&cap, 0, sizeof(cap));
       camDev=QString("/dev/")+devList.at(i);
-      fd = v4l2_open(camDev.toLatin1().data(), O_RDWR, 0);
+      fd = v4l2_open(camDev.toUtf8().data(), O_RDWR, 0);
       if(fd < 0)
         {
           QString msg=QString("Unable to open file %1\n%2").arg(camDev).arg(strerror(errno));
